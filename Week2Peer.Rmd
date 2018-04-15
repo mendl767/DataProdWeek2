@@ -1,0 +1,35 @@
+---
+title: "Week 2 Assignment"
+author: "Steve Johnson"
+date: "April 14, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+```
+
+## Leaflet Map
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+df<-data.frame(
+  lat=c(8.233333,7.526944),
+  lng=c(0.766667, 1.126667),
+  pop=c(800, 84979)
+)
+
+links<-c("<a href = 'https://en.wikipedia.org/wiki/Mpoti' >Mpoti Village<br>Pop ~800</a>", 
+        "<a href = 'https://en.wikipedia.org/wiki/Atakpame' >Atakpame<br>Pop ~85,000</a>")
+
+pcIcon<-makeIcon(
+  iconUrl = "http://shortyawards.com/2nd-socialgood/peace-corps-do-the-unexpected",
+  iconWidth = 31*215/230, iconHeight = 31,
+  iconAnchorX = 31*215/230/2, iconAnchorY =16
+)
+
+my_map<- df %>% leaflet() %>% addTiles() %>% addMarkers(popup=links) %>% addCircles(weight=1, radius =sqrt(df$pop)*50)
+my_map
+```
+
+
